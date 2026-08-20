@@ -1,0 +1,59 @@
+# PREDIX HER2 multimodal pCR pipeline — dependencies
+#
+# THE EXACT VERSIONS THAT PRODUCED THE PUBLISHED RESULTS are pinned below and
+# are recorded independently in `results/run_provenance.json` under
+# `environment`. Install these to reproduce the deposited numbers bit for bit.
+#
+# Read this before relaxing a pin: an earlier version of this file carried
+# `numpy>=2.0` and `scipy>=1.14`, which EXCLUDE the versions production actually
+# used (numpy 1.26.4, scipy 1.10.0). Anyone following those bounds would have
+# installed an environment the results were never produced in, while the file
+# claimed to describe the published run. The right-hand comments were wrong too.
+#
+# Install:
+#   python -m venv predix_env
+#   source predix_env/bin/activate        # Windows: predix_env\Scripts\activate
+#   pip install -r requirements.txt
+
+# --- production environment: Python 3.10.12 on Linux (glibc 2.35) ------------
+numpy==1.26.4
+pandas==2.3.3
+scikit-learn==1.7.2
+scipy==1.10.0
+shap==0.49.1
+joblib==1.5.3
+
+# Not recorded in run_provenance.json (they affect rendering and file I/O, not
+# any computed value), so these stay as lower bounds rather than false pins.
+matplotlib>=3.9
+openpyxl>=3.1
+threadpoolctl>=3.5
+
+# --- on portability, stated precisely ---------------------------------------
+# What has actually been verified, and what has not:
+#
+#   VERIFIED. The reporting and verification layer — every table, figure and
+#   statistical check in the reproducibility notebook — re-executes on Windows
+#   with Python 3.14 and current releases, reproducing 179,350 deposited
+#   workbook cells with zero mismatches and both external validations to
+#   |diff| = 0.
+#
+#   NOT VERIFIED. The full model-fitting pipeline has NOT been re-run end to end
+#   on a newer stack; it is an ~11.5-hour job and was executed once, in the
+#   environment pinned above. Do not assume model fits are invariant across
+#   scikit-learn majors — solver defaults, tie-breaking and RNG consumption all
+#   change between releases, and this analysis reports selection frequencies
+#   over 1,000 folds, which are sensitive to exactly that.
+#
+# So: pin for reproduction, and treat a newer stack as a re-analysis to be
+# reported as such, not as a reproduction.
+#
+# shap 0.49.1 predates Python 3.14 support. On 3.14 install shap>=0.52; SHAP
+# values agree on the versions tested, but see the caveat above.
+
+# Deliberately NOT required: statsmodels and lifelines. The logistic and Cox
+# models, the likelihood-ratio test, the log-rank test and the Kaplan-Meier
+# estimator used in revision_analyses.py are implemented directly against numpy
+# and scipy, so the repository has no dependency a reviewer cannot install from
+# a bare environment. Both implementations are validated against reference
+# results in the test suite.

@@ -1,0 +1,11 @@
+{
+  "python": "3.10.12",
+  "platform": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+  "numpy": "1.26.4",
+  "pandas": "2.3.3",
+  "scikit-learn": "1.7.2",
+  "scipy": "1.10.0",
+  "shap": "0.49.1",
+  "joblib": "1.5.3",
+  "_record_source": "results/run_provenance.json of the production run (pipeline_version 2.0.0-revision1, generated_utc 2026-08-19T19:35:48+00:00)"
+}
