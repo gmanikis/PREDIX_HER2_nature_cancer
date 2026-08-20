@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite the article below."
+title: "PREDIX HER2 — multimodal prediction of pathological complete response"
+abstract: >-
+  Analysis code, deposited cross-validation artefacts and a verification
+  notebook for the multimodal (clinical, transcriptomic, genomic, proteomic and
+  whole-slide-image) prediction of pathological complete response in the
+  PREDIX HER2 randomised trial.
+type: software
+authors:
+  - family-names: "[AUTHOR NOTE: add the author list, in the article's order]"
+    given-names: ""
+repository-code: "[AUTHOR NOTE: add the GitHub URL after the first push]"
+license: "[AUTHOR NOTE: set once LICENSE is chosen]"
+version: "2.0.0-revision1"
+date-released: "2026-08-21"
+keywords:
+  - breast cancer
+  - HER2
+  - multimodal machine learning
+  - pathological complete response
+  - cross-validation
+preferred-citation:
+  type: article
+  title: "[AUTHOR NOTE: article title]"
+  journal: "Nature Cancer"
+  year: [AUTHOR NOTE: year]
+  doi: "[AUTHOR NOTE: DOI once assigned]"
+  authors:
+    - family-names: "[AUTHOR NOTE]"
+      given-names: ""

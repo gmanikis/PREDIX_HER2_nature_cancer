@@ -1,0 +1,28 @@
+LICENSE — TO BE CHOSEN BY THE AUTHORS BEFORE THE REPOSITORY IS MADE PUBLIC.
+
+This placeholder is deliberate: the code and the patient-derived data in this
+repository are not necessarily distributable under the same terms, and neither
+choice should be made automatically.
+
+Common arrangement for a repository of this kind:
+
+  * code/, supplementary/, docs/  — a permissive software licence (MIT, BSD-3,
+    Apache-2.0).
+  * data/, results/, report/      — a data licence (for example CC BY 4.0), and
+    only after the data-sharing permissions below have been confirmed.
+
+BEFORE MAKING THIS REPOSITORY PUBLIC, CONFIRM:
+
+  1. That the PREDIX HER2 trial's ethics approval and patient consent permit
+     public release of `data/clin_multiomics_curated_metrics_PREDIX_HER2_new.txt`
+     (197 patients; derived molecular metrics and pathological complete response).
+     If they do not, replace that file with a controlled-access pointer; the
+     notebook will then verify everything downstream of `results/` and report
+     the missing input rather than failing silently.
+  2. The redistribution terms of the two external cohorts in `data/`
+     (I-SPY2, GEO GSE194040; NCT02326974, GEO GSE243375). These are derived
+     metrics computed from public GEO series and should carry attribution to
+     the original studies.
+  3. The copyright holder to name (institution or authors).
+
+Placeholder generated 2026-08-21.
