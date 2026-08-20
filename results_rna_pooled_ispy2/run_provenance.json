@@ -1,0 +1,84 @@
+{
+  "pipeline_version": "2.0.0-revision1",
+  "generated_utc": "2026-08-20T04:38:22+00:00",
+  "random_seed": 42,
+  "input_data": {
+    "path": "clin_multiomics_curated_metrics_PREDIX_HER2_new.txt",
+    "sha256": "64dd2f3ff1c99170c70a27685c7d9d5633c5ae2edb23b45dbabc1b88a575cef0"
+  },
+  "resolved_splits_dir": "results_rna_pooled_ispy2/splits",
+  "active_classifiers": [
+    "ElasticNet_LR",
+    "RandomForest",
+    "ExtraTrees",
+    "HistGradBoost",
+    "SVM_RBF",
+    "SVM_Linear"
+  ],
+  "parameters": {
+    "classifiers": [
+      "ElasticNet_LR",
+      "RandomForest",
+      "ExtraTrees",
+      "HistGradBoost",
+      "SVM_RBF",
+      "SVM_Linear"
+    ],
+    "consensus": true,
+    "consensus_only": false,
+    "corr_threshold": 0.9,
+    "data_path": "clin_multiomics_curated_metrics_PREDIX_HER2_new.txt",
+    "experiments": [
+      "global"
+    ],
+    "feature_pool": "curated",
+    "include_features": "report/tables/revision/shared_features_I-SPY2.txt",
+    "inner_folds_arm": 3,
+    "inner_folds_global": 5,
+    "modalities": [
+      "RNA"
+    ],
+    "mode": "elasticnet",
+    "n_jobs": 14,
+    "nzv_freq_arm": 0.98,
+    "nzv_freq_global": 0.95,
+    "nzv_ratio": 20.0,
+    "outer_folds_arm": 5,
+    "outer_folds_global": 5,
+    "repeats_arm": 10,
+    "repeats_global": 200,
+    "results_dir": "results_rna_pooled_ispy2",
+    "seed": 42,
+    "signature_source": "winner_folds",
+    "splits_dir": "results_rna_pooled_ispy2/splits",
+    "stability_thresh_arm": 0.5,
+    "stability_thresh_global": 0.6,
+    "training_data": "cc_only",
+    "univ_fdr_q": 0.25,
+    "univ_max_k": 40,
+    "univ_min_k": 5,
+    "univariate_screen": "in_fold"
+  },
+  "leakage_control": {
+    "univariate_screen": "in_fold",
+    "note": "in_fold: the univariate association step is performed inside each training fold, so no test patient influences which features enter the model. none: reproduces the original submission, in which that step had been applied to the whole cohort."
+  },
+  "environment": {
+    "python": "3.10.12",
+    "platform": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.10.0",
+    "shap": "0.49.1",
+    "joblib": "1.5.3"
+  },
+  "reproducibility_note": "Cross-validation partitions are fully determined by random_seed. Classifier internal randomness is deliberately NOT seeded (random_state=None): seeding it would make every repeat see the same bootstrap sample for a given fold, correlating the repeats and producing artificially narrow variance on fold-averaged metrics. Point estimates are stable across runs; the last digit of a per-fold metric may vary.",
+  "cv_design": {
+    "methods_paragraph": "Prediction performance was evaluated by repeated stratified nested cross-validation. The outer loop was stratified 5-fold cross-validation repeated 200 times with different random partitions (1000 outer test-fold evaluations; each outer training set comprised ~80% of patients and each held-out test fold ~20%). Within every outer training fold, stratified 5-fold inner cross-validation was used for classifier selection, hyperparameter tuning and feature-signature discovery; all preprocessing (imputation, near-zero-variance filtering, correlation pruning, scaling, the univariate outcome screen) was fitted on outer training patients only. Arm-specific models used 5-fold outer cross-validation repeated 10 times (50 evaluations per arm) with 3-fold inner cross-validation. No shuffle-split resampling was used at any stage.",
+    "figure_legend": "Schematic of the repeated stratified nested cross-validation framework. The outer loop is stratified 5-fold cross-validation repeated 200 times (1000 outer evaluations; ~80% training / ~20% testing per fold). Within each outer training fold, stratified 5-fold inner cross-validation performs model selection and feature ranking. The selected model is evaluated on the corresponding held-out outer test fold, and performance is pooled across all 1000 outer evaluations.",
+    "outer_evaluations_global": 1000,
+    "outer_evaluations_per_arm": 50,
+    "scheme": "RepeatedStratifiedKFold"
+  }
+}
